@@ -1,9 +1,12 @@
-import type { AuditEntry, Contract, ContractSummary, Role } from './types';
+import { reactive } from 'vue';
+import type { AuditEntry, Comment, Contract, ContractSummary, Diff, Renewals, Role, Template, VersionMeta } from './types';
 
 export const session = { role: 'Drafter' as Role, user: 'Dana Drafter' };
+/** Shared UI setting: the "expiring soon" window (days) used by the Renewals panel and the list toggle. */
+export const settings = reactive({ renewalDays: 30 });
 
-async function call<T>(path: string, method = 'GET', body?: unknown): Promise<T> {
-  const res = await fetch(`/api/contracts${path}`, {
+async function call<T>(path: string, method = 'GET', body?: unknown, base = '/api/contracts'): Promise<T> {
+  const res = await fetch(`${base}${path}`, {
     method,
     headers: { 'Content-Type': 'application/json', 'x-role': session.role, 'x-user': encodeURIComponent(session.user) },
     body: body ? JSON.stringify(body) : undefined,
@@ -13,10 +16,23 @@ async function call<T>(path: string, method = 'GET', body?: unknown): Promise<T>
   return data as T;
 }
 
-export interface DraftInput { title: string; counterparty: string; content: string; signers: string[] }
+export interface DraftInput { title: string; counterparty: string; content: string; signers: string[]; endDate?: string }
 
 export const api = {
-  list: () => call<ContractSummary[]>(''),
+  list: (f: { q?: string; status?: string; expiringWithin?: number } = {}) => {
+    const p = new URLSearchParams();
+    if (f.q) p.set('q', f.q);
+    if (f.status) p.set('status', f.status);
+    if (f.expiringWithin !== undefined) p.set('expiringWithin', String(f.expiringWithin));
+    return call<ContractSummary[]>(p.toString() ? `?${p}` : '');
+  },
+  renewals: (days: number) => call<Renewals>(`/renewals?days=${days}`),
+  templates: () => call<Template[]>('', 'GET', undefined, '/api/templates'),
+  fillTemplate: (id: string, values: Record<string, string>) =>
+    call<{ title: string; content: string }>(`/${id}/fill`, 'POST', { values }, '/api/templates'),
+  comment: (id: string, text: string, parentId?: string) => call<Comment>(`/${id}/comments`, 'POST', { text, parentId }),
+  versions: (id: string) => call<VersionMeta[]>(`/${id}/versions`),
+  diff: (id: string, from: number) => call<Diff>(`/${id}/diff?from=${from}`),
   get: (id: string) => call<Contract>(`/${id}`),
   audit: (id: string) => call<AuditEntry[]>(`/${id}/audit`),
   create: (d: DraftInput) => call<Contract>('', 'POST', d),

@@ -25,3 +25,13 @@ label { font-size: .85rem; font-weight: 600; }
 .doc { border: 1px solid #e5e7eb; padding: 4px 16px; border-radius: 4px; }
 .muted { color: #6b7280; font-size: .85rem; }
 .row-flex { display: flex; gap: 8px; align-items: center; justify-content: space-between; }
+input[type=checkbox] { width: auto; margin: 0 4px 0 0; }
+.filters { display: flex; gap: 8px; align-items: center; margin-bottom: 12px; }
+.filters input, .filters select { margin: 0; width: auto; padding: 6px; border: 1px solid #d1d5db; border-radius: 4px; }
+.filters input[type=search] { flex: 1; }
+.badge.EXPIRED { background: #fecaca; color: #991b1b; } .badge.EXPIRING { background: #fde68a; }
+.diff { font-family: ui-monospace, monospace; font-size: .85rem; border: 1px solid #e5e7eb; border-radius: 4px; }
+.diff div { padding: 2px 8px; white-space: pre-wrap; }
+.diff .add { background: #dcfce7; } .diff .del { background: #fee2e2; text-decoration: line-through; }
+.comment { border-left: 3px solid #e5e7eb; padding: 4px 10px; margin: 8px 0; }
+.comment.reply { margin-left: 28px; }
