@@ -1,0 +1,27 @@
+:root { font-family: system-ui, sans-serif; color: #1f2937; background: #f3f4f6; }
+body { margin: 0; }
+header { background: #1e3a8a; color: #fff; padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; }
+header h1 { font-size: 1.1rem; margin: 0; cursor: pointer; }
+header select, header input { margin-left: 8px; padding: 4px; }
+main { max-width: 960px; margin: 24px auto; padding: 0 16px; }
+.card { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 16px; box-shadow: 0 1px 3px #0002; }
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: 8px; border-bottom: 1px solid #e5e7eb; }
+tr.row { cursor: pointer; } tr.row:hover { background: #f9fafb; }
+button { padding: 6px 14px; border: 0; border-radius: 4px; background: #2563eb; color: #fff; cursor: pointer; margin-right: 6px; }
+button.danger { background: #dc2626; } button.ghost { background: #e5e7eb; color: #111; }
+button:disabled { opacity: .5; cursor: not-allowed; }
+input, textarea { padding: 6px; border: 1px solid #d1d5db; border-radius: 4px; width: 100%; box-sizing: border-box; margin: 4px 0 10px; }
+label { font-size: .85rem; font-weight: 600; }
+.badge { padding: 2px 8px; border-radius: 12px; font-size: .75rem; background: #e5e7eb; }
+.badge.DRAFT { background: #e5e7eb; } .badge.REVIEW { background: #fde68a; } .badge.LEGAL { background: #fed7aa; }
+.badge.APPROVED { background: #bfdbfe; } .badge.SIGNED { background: #bbf7d0; }
+.error { background: #fee2e2; color: #991b1b; padding: 8px 12px; border-radius: 4px; margin-bottom: 12px; }
+.editor { border: 1px solid #d1d5db; border-radius: 4px; margin-bottom: 10px; }
+.toolbar { padding: 6px; border-bottom: 1px solid #e5e7eb; background: #f9fafb; }
+.toolbar button { background: #fff; color: #111; border: 1px solid #d1d5db; padding: 3px 9px; }
+.toolbar button.on { background: #dbeafe; }
+.ProseMirror { padding: 10px; min-height: 160px; outline: none; }
+.doc { border: 1px solid #e5e7eb; padding: 4px 16px; border-radius: 4px; }
+.muted { color: #6b7280; font-size: .85rem; }
+.row-flex { display: flex; gap: 8px; align-items: center; justify-content: space-between; }
