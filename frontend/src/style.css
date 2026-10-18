@@ -35,3 +35,11 @@ input[type=checkbox] { width: auto; margin: 0 4px 0 0; }
 .diff .add { background: #dcfce7; } .diff .del { background: #fee2e2; text-decoration: line-through; }
 .comment { border-left: 3px solid #e5e7eb; padding: 4px 10px; margin: 8px 0; }
 .comment.reply { margin-left: 28px; }
+
+header .who { display: flex; align-items: center; gap: 8px; }
+header .who label { font-size: .9rem; font-weight: 400; }
+header .who input { width: 160px; margin: 0; }
+header .who select { margin: 0; }
+.hint { background: #eff6ff; border: 1px solid #bfdbfe; color: #1e3a8a; padding: 10px 14px; border-radius: 6px; font-size: .9rem; margin: 0 0 16px; }
+.actions-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.actions-row input { margin: 0; flex: 1; min-width: 220px; width: auto; }

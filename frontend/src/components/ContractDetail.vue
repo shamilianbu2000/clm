@@ -69,14 +69,18 @@ async function showDiff(n: number) {
         <button @click="run(() => api.submit(c!.id))">Submit for review</button>
       </template>
       <template v-else-if="c.status === 'REVIEW' || c.status === 'LEGAL'">
-        <input v-model="comment" placeholder="Comment (required to reject)" />
-        <button @click="run(() => api.approve(c!.id, comment))">Approve</button>
-        <button class="danger" @click="run(() => api.reject(c!.id, comment))">Reject to draft</button>
+        <div class="actions-row">
+          <input v-model="comment" placeholder="Comment (required to reject)" aria-label="Decision comment" />
+          <button @click="run(() => api.approve(c!.id, comment))">Approve</button>
+          <button class="danger" :disabled="!comment.trim()" title="A comment is required to reject" @click="run(() => api.reject(c!.id, comment))">Reject to draft</button>
+        </div>
       </template>
       <template v-else-if="c.status === 'APPROVED'">
         <p>Next signer: <b>{{ nextSigner?.name }}</b></p>
-        <input v-model="signature" :placeholder="`Type full name: ${nextSigner?.name}`" />
-        <button @click="run(() => api.sign(c!.id, signature))">Sign</button>
+        <div class="actions-row">
+          <input v-model="signature" :placeholder="`Type full name: ${nextSigner?.name}`" aria-label="Signature" />
+          <button :disabled="!signature.trim()" @click="run(() => api.sign(c!.id, signature))">Sign</button>
+        </div>
       </template>
     </div>
 
